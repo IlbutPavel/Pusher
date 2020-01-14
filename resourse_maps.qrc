@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>maps/sokoban-maps-60-plain.txt</file>
+    </qresource>
+</RCC>
