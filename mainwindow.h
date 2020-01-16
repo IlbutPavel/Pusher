@@ -18,12 +18,7 @@ public:
 	~MainWindow();
 
 
-
-	Maps* maps;
-
-
-
-public slots:
+private slots:
 	void changeLevel(int key);
 	void compressWindow();
 
@@ -39,6 +34,7 @@ private:
 	QPushButton* startButton;
 	QPushButton* stopButton;
 
+	Maps* maps;
 	QTimer* timerResize;
 
 };

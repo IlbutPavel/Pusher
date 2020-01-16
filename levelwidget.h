@@ -5,44 +5,34 @@
 #include <QGridLayout>
 
 #include "level.h"
+#include "controllevel.h"
 
 class LevelWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit LevelWidget(Level* levelForSet, QWidget *parent = nullptr);
-
-
-	Level* getlevel() const { return level; }
+	explicit LevelWidget(Level* levelForCopy, QWidget *parent = nullptr);
+	~LevelWidget() override;
 
 signals:
 
 
 
-
-public slots:
-
-	void keyUpClicked();
-	void keyDownClicked();
-	void keyLeftClicked();
-	void keyRightClicked();
-
+private slots:
+	void redrawPictureWidget(int i, int j, CellType type);
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent *event) override;
 	virtual void mousePressEvent(QMouseEvent *event) override;
-	virtual void mouseReleaseEvent(QMouseEvent *event) override;
 
 
 private:
 	QGridLayout* layout;
 	QWidget*** matrixWidgets;
 	Level* level;
+	ControlLevel* controlLevel;
 
-	int drag_i;
-	int drag_j;
 
-	void key_move(int mv_x, int mv_y, int mv_xx, int mv_yy);
 
 };
 

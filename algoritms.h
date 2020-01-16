@@ -10,17 +10,13 @@ class Algoritms : public QObject
 {
 	Q_OBJECT
 public:
-	explicit Algoritms(QObject *parent = nullptr);
+	explicit Algoritms(Level* level, QObject *parent = nullptr);
+	~Algoritms();
 
 
-	struct moveCell
-	{
-		int dist;
-		bool closed;
-	};
 
-	static bool moveManForMouse(int xdest, int ydest, Level* level);
-
+	bool moveManForMouse(int xdest, int ydest, Level* level);
+	bool isCongratulation();
 
 
 signals:
@@ -30,9 +26,16 @@ signals:
 private:
 
 	static void backTrace();
+	Level* level;
 
+	QList<CellType*> targetCell;
 
-
+	struct moveCell
+	{
+		int dist;
+		bool isClosed;
+	};
+	moveCell** moveField;
 
 };
 

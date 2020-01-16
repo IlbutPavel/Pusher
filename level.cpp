@@ -13,7 +13,7 @@ Level::Level(int xx, int yy, QObject* parent) : QObject(parent)
 	}
 }
 
-Level::Level(Level* needCopy)
+Level::Level(Level* needCopy, QObject* parent) : QObject(parent)
 {
 	x = needCopy->x;
 	y = needCopy->y;

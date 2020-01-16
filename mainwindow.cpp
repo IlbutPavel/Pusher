@@ -41,15 +41,10 @@ MainWindow::MainWindow(QWidget *parent)
 	layout->addStretch();
 	layout->addWidget(levelWidget);
 
-
 	choiseLevel->setAlignment(Qt::AlignLeft);
 	choiseLevel->setMinimum(1);
 	choiseLevel->setMaximum(maps->mapLevels.size());
 	choiseLevel->show();
-
-
-
-
 }
 
 MainWindow::~MainWindow()

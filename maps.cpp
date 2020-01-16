@@ -11,7 +11,7 @@ Maps::Maps(QObject *parent) : QObject(parent)
 	}
 	else
 	{
-		while (! file->atEnd())
+		while (true)
 		{
 			file->readLine();												// empty line
 			file->readLine();												// *******************
@@ -22,19 +22,14 @@ Maps::Maps(QObject *parent) : QObject(parent)
 			file->readLine();												// End: 14BD
 			file->readLine();												// Length: 50
 			file->readLine();												// empty line
-//			qDebug() << n << x << y;
 			if (file->atEnd())
-			{
-				qDebug() << "file.atEnd()";
 				break;
-			}
 
 			Level* newLevel = new Level(x, y);
 			installCells(file, newLevel);
 
 			mapLevels.insert(n, newLevel);
 		}
-
 	}
 }
 

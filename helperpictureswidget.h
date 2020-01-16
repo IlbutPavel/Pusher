@@ -5,6 +5,8 @@
 
 #include "level.h"
 
+#define SIZE_CELL 30
+
 class HelperPicturesWidget
 {
 public:

@@ -21,7 +21,7 @@ class Level : public QObject
 	Q_OBJECT
 public:
 	explicit Level(int xx, int yy, QObject *parent = nullptr);
-	explicit Level(Level* needCopy);
+	explicit Level(Level* needCopy, QObject *parent = nullptr);
 
 
 	int x;

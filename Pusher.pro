@@ -17,7 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     algoritms.cpp \
+    controllevel.cpp \
     helperpictureswidget.cpp \
+    historyaction.cpp \
     level.cpp \
     levelwidget.cpp \
     main.cpp \
@@ -26,7 +28,9 @@ SOURCES += \
 
 HEADERS += \
     algoritms.h \
+    controllevel.h \
     helperpictureswidget.h \
+    historyaction.h \
     level.h \
     levelwidget.h \
     mainwindow.h \
