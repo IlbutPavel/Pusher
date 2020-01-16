@@ -31,6 +31,11 @@ ControlLevel::ControlLevel(Level* levelForSet, QWidget *parent) : QWidget(parent
 	connect(keyCancel, &QShortcut::activated, this, &ControlLevel::keyCancelClicked);
 }
 
+ControlLevel::~ControlLevel()
+{
+	delete maker;
+}
+
 void ControlLevel::key_move(int dx, int dy)
 {
 	int man_x_new = level->man_x + dx;
@@ -64,12 +69,7 @@ void ControlLevel::key_move(int dx, int dy)
 		history.push(new HistoryAction(dx, dy, moveBox));
 	}
 	if (maker->isCongratulation())
-	{
-		qDebug() << "Level is complite!!!";
 		QMessageBox::information(this, "Congratulation", "Level is complite!!!");
-	}
-	else
-		qDebug() << "not";
 }
 
 void ControlLevel::cancel_move(int dx, int dy, bool moveBox)
@@ -92,14 +92,12 @@ void ControlLevel::cancel_move(int dx, int dy, bool moveBox)
 			*box_cell = empty;
 		else
 			*box_cell = destination;
-
 		emit needRedrawPictureWidget(box_x, box_y, *box_cell);
 
 		if (*box_cell_old == empty)
 			*box_cell_old = box;
 		else
 			*box_cell_old = destBox;
-
 		emit needRedrawPictureWidget(box_x_old, box_y_old, *box_cell_old);
 	}
 }

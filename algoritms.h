@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QSet>
+#include <QVector>
+#include <QList>
 
 #include "level.h"
 
@@ -30,12 +32,12 @@ private:
 
 	QList<CellType*> targetCell;
 
-	struct moveCell
+	struct MoveCell
 	{
 		int dist;
 		bool isClosed;
 	};
-	moveCell** moveField;
+	QVector<QVector<MoveCell>> moveField;
 
 };
 

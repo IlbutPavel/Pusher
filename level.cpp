@@ -6,11 +6,9 @@ Level::Level(int xx, int yy, QObject* parent) : QObject(parent)
 	x = xx;
 	y = yy;
 
-	field = new CellType*[x];
+	field.resize(x);
 	for (int i=0; i<x; i++)
-	{
-		field[i] = new CellType[y];
-	}
+		field[i].resize(y);
 }
 
 Level::Level(Level* needCopy, QObject* parent) : QObject(parent)
@@ -21,13 +19,5 @@ Level::Level(Level* needCopy, QObject* parent) : QObject(parent)
 	man_x = needCopy->man_x;
 	man_y = needCopy->man_y;
 
-	field = new CellType*[x];
-	for (int i=0; i<x; i++)
-	{
-		field[i] = new CellType[y];
-	}
-
-	for (int j=0; j<y; j++)
-		for (int i=0; i<x; i++)
-			field[i][j] = needCopy->field[i][j];
+	field = needCopy->field;
 }

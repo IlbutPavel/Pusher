@@ -10,7 +10,7 @@
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
-	timerResize = new QTimer;
+	timerResize = new QTimer(this);
 	timerResize->setSingleShot(true);
 	connect(timerResize, &QTimer::timeout, this, &MainWindow::compressWindow);
 

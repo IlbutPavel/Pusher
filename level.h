@@ -2,7 +2,7 @@
 #define LEVEL_H
 
 #include <QObject>
-
+#include <QVector>
 
 enum CellType {
 	empty = 0,
@@ -14,8 +14,6 @@ enum CellType {
 	destMan
 };
 
-
-
 class Level : public QObject
 {
 	Q_OBJECT
@@ -23,16 +21,13 @@ public:
 	explicit Level(int xx, int yy, QObject *parent = nullptr);
 	explicit Level(Level* needCopy, QObject *parent = nullptr);
 
-
 	int x;
 	int y;
 
 	int man_x;
 	int man_y;
 
-	CellType** field;
-
-
+	QVector<QVector<CellType>> field;
 
 signals:
 

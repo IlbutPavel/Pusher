@@ -15,9 +15,10 @@ LevelWidget::LevelWidget(Level* levelForCopy, QWidget *parent) : QWidget(parent)
 	setLayout(layout);
 	level = new Level(levelForCopy, this);					//недо конструктор копирования
 	controlLevel = new ControlLevel(level, this);
-	matrixWidgets = new QWidget**[level->x];
+
+	matrixWidgets.resize(level->x);
 	for (int i=0; i<level->x; i++)
-		matrixWidgets[i] = new QWidget*[level->y];
+		matrixWidgets[i].resize(level->y);
 
 	for (int i=0; i<level->x; i++)
 	{
@@ -38,9 +39,6 @@ LevelWidget::LevelWidget(Level* levelForCopy, QWidget *parent) : QWidget(parent)
 
 LevelWidget::~LevelWidget()
 {
-	for (int i=0; i<level->x; i++)
-		delete matrixWidgets[i];
-	delete matrixWidgets;
 }
 
 void LevelWidget::redrawPictureWidget(int i, int j, CellType type)

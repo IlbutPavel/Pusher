@@ -12,19 +12,14 @@ Algoritms::Algoritms(Level* levelForSet, QObject *parent) : QObject(parent)
 			if (level->field[i][j] == destination || level->field[i][j] == destBox)
 				targetCell.append(&(level->field[i][j]));
 
-
-
-	//	moveField = new moveCell*[level->x * level->y];
-	moveField = new moveCell*[level->x];
+	moveField.resize(level->x);
 	for (int i=0; i < level->x; i++)
-		moveField[i] = new moveCell[level->y];
+		moveField[i].resize(level->y);
 }
 
 Algoritms::~Algoritms()
 {
-	for (int i=0; i<level->x; i++)
-		delete moveField[i];
-	delete  moveField;
+
 }
 
 bool Algoritms::moveManForMouse(int xdest, int ydest, Level* level)

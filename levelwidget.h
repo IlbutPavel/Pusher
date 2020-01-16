@@ -28,7 +28,7 @@ protected:
 
 private:
 	QGridLayout* layout;
-	QWidget*** matrixWidgets;
+	QVector<QVector<QWidget*>> matrixWidgets;
 	Level* level;
 	ControlLevel* controlLevel;
 

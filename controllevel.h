@@ -13,6 +13,7 @@ class ControlLevel : public QWidget
 	Q_OBJECT
 public:
 	explicit ControlLevel(Level* levelForSet, QWidget *parent = nullptr);
+	~ControlLevel();
 
 	void setCellMoveCoordinate(int i, int j);
 	void setCellPressCoordinate(int i, int j);
