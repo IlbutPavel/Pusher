@@ -19,11 +19,13 @@ public:
 
 
 private slots:
-	void changeLevel(int key);
+	void spinBoxChangeLevel(int key);
+	void changeLevel(Level* level, ControlLevel* controlLevel);
 	void compressWindow();
 
 	void startButtonClicked();
 	void stopButtonClicked();
+	void loadButtonClicked();
 
 
 private:
@@ -33,6 +35,7 @@ private:
 	QSpinBox* choiseLevel;
 	QPushButton* startButton;
 	QPushButton* stopButton;
+	QPushButton* loadButton;
 
 	Maps* maps;
 	QTimer* timerResize;

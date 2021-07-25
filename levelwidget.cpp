@@ -3,18 +3,26 @@
 #include "helperpictureswidget.h"
 #include <QMouseEvent>
 #include <QDebug>
-#include <QCoreApplication>
+#include <QMessageBox>
 
 
 
-LevelWidget::LevelWidget(Level* levelForCopy, QWidget *parent) : QWidget(parent)
+LevelWidget::LevelWidget(QWidget* parent) : QWidget(parent)
+{
+
+}
+
+LevelWidget::LevelWidget(Level* levelForCopy, ControlLevel* controlLevelForSet, QWidget *parent) : QWidget(parent)
 {
 	layout = new QGridLayout;
 	layout->setContentsMargins(0, 0, 0, 0);
 	layout->setSpacing(0);
 	setLayout(layout);
-	level = new Level(levelForCopy, this);					//недо конструктор копирования
-	controlLevel = new ControlLevel(level, this);
+	level = levelForCopy;
+	level->setParent(this);
+	level->addObserver(this);
+	controlLevel = controlLevelForSet;
+	controlLevel->setParent(this);
 
 	matrixWidgets.resize(level->x);
 	for (int i=0; i<level->x; i++)
@@ -25,7 +33,7 @@ LevelWidget::LevelWidget(Level* levelForCopy, QWidget *parent) : QWidget(parent)
 		for (int j=0; j<level->y; j++)
 		{
 			matrixWidgets[i][j] = new QWidget;
-			matrixWidgets[i][j]->setStyleSheet(HelperPicturesWidget::getStyleSheet(level->field[i][j]));
+			matrixWidgets[i][j]->setStyleSheet(HelperPicturesWidget::getStyleSheet(level->getFieldCell(i, j)));
 			layout->addWidget(matrixWidgets[i][j], j, i);
 		}
 	}
@@ -33,8 +41,6 @@ LevelWidget::LevelWidget(Level* levelForCopy, QWidget *parent) : QWidget(parent)
 	resize(level->x * SIZE_CELL, level->y * SIZE_CELL);
 	setMinimumSize(level->x * SIZE_CELL, level->y * SIZE_CELL);
 	setMaximumSize(level->x * SIZE_CELL, level->y * SIZE_CELL);
-
-	connect(controlLevel, &ControlLevel::needRedrawPictureWidget, this, &LevelWidget::redrawPictureWidget);
 }
 
 LevelWidget::~LevelWidget()
@@ -44,6 +50,12 @@ LevelWidget::~LevelWidget()
 void LevelWidget::redrawPictureWidget(int i, int j, CellType type)
 {
 	matrixWidgets[i][j]->setStyleSheet(HelperPicturesWidget::getStyleSheet(type));
+}
+
+void LevelWidget::finishPlay()
+{
+	setEnabled(false);
+	QMessageBox::information(this, "Congratulation", "Level is complite!!!");
 }
 
 void LevelWidget::mouseMoveEvent(QMouseEvent* event)

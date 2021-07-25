@@ -7,11 +7,6 @@ Algoritms::Algoritms(Level* levelForSet, QObject *parent) : QObject(parent)
 {
 	level = levelForSet;
 
-	for (int i=0; i < level->x; i++)
-		for (int j=0; j < level->y; j++)
-			if (level->field[i][j] == destination || level->field[i][j] == destBox)
-				targetCell.append(&(level->field[i][j]));
-
 	moveField.resize(level->x);
 	for (int i=0; i < level->x; i++)
 		moveField[i].resize(level->y);
@@ -24,7 +19,6 @@ Algoritms::~Algoritms()
 
 bool Algoritms::moveManForMouse(int xdest, int ydest, Level* level)
 {
-	bool successful = false;
 	int xman = level->man_x;
 	int yman = level->man_y;
 
@@ -32,14 +26,14 @@ bool Algoritms::moveManForMouse(int xdest, int ydest, Level* level)
 	{
 		for (int j = 0; j < level->y; j++)
 		{
-			moveField[i][j].isClosed = level->field[i][j] != empty && level->field[i][j] != destination;
+			moveField[i][j].isClosed = level->getFieldCell(i, j) != empty && level->getFieldCell(i, j) != destination;
 			moveField[i][j].dist = -1;
 		}
 	}
 
 	QMultiMap<int, QPair<int, int>> queMap;			// <distance <x_cell, y_cell>>
 	queMap.insertMulti(0, QPair<int, int>(xman, yman));
-	for (int dist=0; !queMap.isEmpty() && !successful; dist++)
+	for (int dist=0; !queMap.isEmpty(); dist++)
 	{
 		while (!queMap.empty())
 		{
@@ -52,10 +46,8 @@ bool Algoritms::moveManForMouse(int xdest, int ydest, Level* level)
 			moveField[i][j].dist = it.key();
 
 			if (i == xdest && j == ydest)
-			{
-				successful = true;
-				break;
-			}
+				return true;
+
 			moveField[i][j].isClosed = true;
 			queMap.remove(it.key(), it.value());
 
@@ -78,7 +70,6 @@ bool Algoritms::moveManForMouse(int xdest, int ydest, Level* level)
 		}
 	}
 
-
 //	QString showPath;																		//trace output
 //	for (int j=0; j < level->y; j++)
 //	{
@@ -91,19 +82,27 @@ bool Algoritms::moveManForMouse(int xdest, int ydest, Level* level)
 //		qWarning() << showPath;
 //	}
 
-
-	return successful;
+	return false;
 }
 
 bool Algoritms::isCongratulation()
 {
-	for (auto it = targetCell.begin(); it != targetCell.end(); it++)
-		if (**it != destBox)
-			return false;
+	for (int j=0; j < level->y; j++)
+		for (int i=0; i < level->x; i++)
+			if (level->getFieldCell(i, j) == box || level->getFieldCell(i, j) == destination)
+				return false;
 
 	return true;
 }
 
+//bool Algoritms::isCongratulation()
+//{
+//	for (int j=0; j < level->y; j++)
+//		for (int i=0; i < level->x; i++)
+//			if (level->getFieldCell(i, j) == destBox)
+//				return true;
 
+//	return false;
+//}
 
 

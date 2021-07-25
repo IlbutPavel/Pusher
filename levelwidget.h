@@ -6,20 +6,20 @@
 
 #include "level.h"
 #include "controllevel.h"
+#include "controllevelplay.h"
+#include "controllevelhistory.h"
+#include "observer.h"
 
-class LevelWidget : public QWidget
+class LevelWidget : public QWidget, public Observer
 {
 	Q_OBJECT
 public:
-	explicit LevelWidget(Level* levelForCopy, QWidget *parent = nullptr);
+	explicit LevelWidget(QWidget *parent = nullptr);
+	explicit LevelWidget(Level* levelForCopy, ControlLevel* controlLevelForSet, QWidget *parent = nullptr);
 	~LevelWidget() override;
 
-signals:
-
-
-
-private slots:
-	void redrawPictureWidget(int i, int j, CellType type);
+	virtual void redrawPictureWidget(int i, int j, CellType type) override;
+	virtual void finishPlay() override;
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent *event) override;

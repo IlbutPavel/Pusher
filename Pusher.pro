@@ -18,23 +18,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     algoritms.cpp \
     controllevel.cpp \
+    controllevelhistory.cpp \
+    controllevelplay.cpp \
     helperpictureswidget.cpp \
     historyaction.cpp \
     level.cpp \
     levelwidget.cpp \
     main.cpp \
     mainwindow.cpp \
-    maps.cpp
+    maps.cpp \
+    observer.cpp
 
 HEADERS += \
     algoritms.h \
     controllevel.h \
+    controllevelhistory.h \
+    controllevelplay.h \
     helperpictureswidget.h \
     historyaction.h \
     level.h \
     levelwidget.h \
     mainwindow.h \
-    maps.h
+    maps.h \
+    observer.h
 
 FORMS +=
 
@@ -45,4 +51,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resourse_maps.qrc \
-    resourse_pictures.qrc
+    resourse_pictures.qrc \
+    styles.qrc

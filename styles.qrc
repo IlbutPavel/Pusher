@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>maps/sokoban-maps-60-plain.txt</file>
+        <file>css/styles.css</file>
     </qresource>
 </RCC>

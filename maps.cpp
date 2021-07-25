@@ -25,7 +25,7 @@ Maps::Maps(QObject *parent) : QObject(parent)
 			if (file->atEnd())
 				break;
 
-			Level* newLevel = new Level(x, y);
+			Level* newLevel = new Level(n, x, y, this);
 			installCells(file, newLevel);
 
 			mapLevels.insert(n, newLevel);
@@ -42,21 +42,21 @@ void Maps::installCells(QFile* file, Level* newLevel)
 		{
 			file->getChar(&c);
 			if (c == ' ')
-				newLevel->field[i][j] = empty;
+				newLevel->setFieldCell(i, j, empty);
 			else if (c == 'X')
-				newLevel->field[i][j] = wall;
+				newLevel->setFieldCell(i, j, wall);
 			else if (c == '.')
-				newLevel->field[i][j] = destination;
+				newLevel->setFieldCell(i, j, destination);
 			else if (c == '*')
-				newLevel->field[i][j] = box;
+				newLevel->setFieldCell(i, j, box);
 			else if (c == '@')
 			{
-				newLevel->field[i][j] = man;
+				newLevel->setFieldCell(i, j, man);
 				newLevel->man_x = i;
 				newLevel->man_y = j;
 			}
 			else if (c == '&')
-				newLevel->field[i][j] = destBox;
+				newLevel->setFieldCell(i, j, destBox);
 			else
 				qDebug() << "ERROR: ______________________________________________________________ UNNOWN SYMBOL IN LEVEL";
 		}
